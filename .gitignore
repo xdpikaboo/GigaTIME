@@ -1,3 +1,7 @@
+# Project-specific
+agent.md
+Miniconda3-latest-Linux-x86_64.sh
+
 # Raw / large data (tiles, slides, sample data)
 data/sample_test_data/
 data/preprocessed_tiles/
