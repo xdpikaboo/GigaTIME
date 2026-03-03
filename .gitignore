@@ -1,4 +1,7 @@
+# Raw / large data (tiles, slides, sample data)
 data/sample_test_data/
+data/preprocessed_tiles/
+data/svs data/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

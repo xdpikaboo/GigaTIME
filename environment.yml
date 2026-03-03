@@ -1,18 +1,15 @@
 name: gigatime_check_1
 
 channels:
-
   - conda-forge
 
 dependencies:
-
   - python=3.11
+  - openslide  # C library for openslide-python (conda-forge)
 
   - pip
- 
 
   - pip:
-
       # Core scientific stack
 
       - numpy~=2.2
@@ -35,6 +32,8 @@ dependencies:
 
       - pyyaml~=6.0
 
+      - openslide-python
+
       - requests~=2.32
 
       - tqdm~=4.66
@@ -53,8 +52,6 @@ dependencies:
 
       - ipywidgets~=8.1
 
- 
-
       # CV / augmentations
 
       - albucore~=0.0
@@ -67,8 +64,6 @@ dependencies:
 
       - edict~=0.51
 
- 
-
       # Performance helpers
 
       - simsimd~=6.5
@@ -77,24 +72,8 @@ dependencies:
 
       - typing-inspection~=0.4
 
- 
-
-      # PyTorch (pick ONE of the blocks below and keep only those lines)
-
-      # macOS / CPU (MPS on Apple Silicon works):
-
-      - torch~=2.4
-
-      - torchvision~=0.19
-
- 
-
-      # Linux + NVIDIA CUDA example (uncomment & adjust cu121/cu124 as needed):
-
-      #- --extra-index-url https://download.pytorch.org/whl/cu124
-
-      # - torch==2.*+cu124
-
-      # - torchvision==0.*+cu124
- 
- 
+      # PyTorch with CUDA (Windows/Linux + NVIDIA GPU)
+      # Requires compatible NVIDIA driver. For CPU-only, replace with: torch~=2.4, torchvision~=0.19
+      - --extra-index-url https://download.pytorch.org/whl/cu124
+      - torch
+      - torchvision

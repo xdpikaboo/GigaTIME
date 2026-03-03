@@ -413,7 +413,11 @@ def main():
     local_dir = snapshot_download(repo_id=repo_id)
 
     weights_path = os.path.join(local_dir, "model.pth")
-    state_dict = torch.load(weights_path, map_location="cpu")
+    # Compatibility: checkpoint may reference torch.utils.serialization (removed in newer PyTorch)
+    import types
+    if "torch.utils.serialization" not in sys.modules:
+        sys.modules["torch.utils.serialization"] = types.ModuleType("torch.utils.serialization")
+    state_dict = torch.load(weights_path, map_location="cpu", weights_only=False)
     model.load_state_dict(state_dict)
     model = torch.nn.DataParallel(model)
     params = filter(lambda p: p.requires_grad, model.parameters())
